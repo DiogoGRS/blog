@@ -1,53 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>About me</title>
-        <link rel="stylesheet" href="style.css">     
-        <!-- Google Fonts - Lora -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
-    </head>
+<html lang="pt" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Mim — Blog do Diogo</title>
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <div data-component="header"></div>
 
-    <body>
-         <header>
-            <h1> <a href="index.html">Diogo's Blog</a> </h1>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="posts.html">Posts</a>
-                <a href="about-me.html">About Me</a>
-                <a href="portfolio.html">Portfolio</a>
-            </nav>
-        </header>
-        <main>
-            <h2>About Me</h2>
+  <main>
+    <h2 data-i18n="about_title">Sobre Mim</h2>
 
-            <section>
-                <h3>Who I am</h3>
-                <p>My name is <strong>Diogo</strong>. I live in <em>Brazil</em> and I'm 26 years old</p>
-                <figure>
-                    <img src="https://pbs.twimg.com/profile_images/1746203923499675648/48itzTeH_400x400.jpg" alt="Photo of Diogo" title="Diogo in a barbecue" width="600" height="400"> 
-                    <figcaption>Diogo enjoying a holiday after a week only eating corn</figcaption>
-                </figure>
-            </section>
+    <section>
+      <h3 data-i18n="about_who_title">Quem sou</h3>
+      <p data-i18n="about_who_text">Me chamo Diogo, tenho 26 anos e moro no Brasil.</p>
+      <figure>
+        <img src="https://pbs.twimg.com/profile_images/1746203923499675648/48itzTeH_400x400.jpg" alt="Foto do Diogo" width="600" height="400">
+        <figcaption>Diogo curtindo um feriado depois de uma semana comendo só milho</figcaption>
+      </figure>
+    </section>
 
-            <section>
-                <h3>What I do</h3>
-                <p>I work as a software developer at an accounting company, using Vue.js and NestJS.</p>
-                <p>I also have experience in clouds, SSR, blog management, and multi-channel marketing campaigns.</p>
-            </section>
+    <section>
+      <h3 data-i18n="about_what_title">O que faço</h3>
+      <p data-i18n="about_what_text1">Trabalho como desenvolvedor de software em uma empresa de contabilidade, usando Vue.js e NestJS.</p>
+      <p data-i18n="about_what_text2">Tenho experiência com cloud, SSR, gestão de blogs e campanhas de marketing multicanal.</p>
+    </section>
 
-            <section>
-                <h3>My learning journey</h3>
-                <p>I'm currently improving my frontend and backend development foundations.</p>
-                <p>I built this blog expanding from HTML only, then adding CSS, JavaScript, and eventually libraries and frameworks.</p>
-            </section>
-        </main>
-        <footer>
-            thank you for visiting, Diogo`s blogs <time datetime="2025-12-18">19th December, 2025 </time>
-        </footer>
+    <section>
+      <h3 data-i18n="about_learning_title">Minha jornada</h3>
+      <p data-i18n="about_learning_text1">Estou aprimorando minhas bases de desenvolvimento frontend e backend.</p>
+      <p data-i18n="about_learning_text2">Construí este blog começando apenas com HTML, adicionando CSS, JavaScript, e eventualmente bibliotecas e frameworks.</p>
+    </section>
+  </main>
 
-    </body>
+  <div data-component="footer"></div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/components.js"></script>
+</body>
 </html>

@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Diogo's blog</title>
-        <link rel="stylesheet" href="style.css">
-         <!-- Google Fonts - Lora -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+<html lang="pt" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog do Diogo</title>
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- theme.js no <head> para evitar flash de tema incorreto ao carregar -->
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <div data-component="header"></div>
 
-    </head>
-    <body>
-        <header>
-            <h1> <a href="index.html">Diogo's Blog</a> </h1>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="posts.html">Posts</a>
-                <a href="about-me.html">About Me</a>
-                <a href="portfolio.html">Portfolio</a>
-            </nav>
-        </header>
-        <main>
-            <h2> Diogo`s blog nice homepage</h2>
-            <section>
-                <p>Here you can check a few tech tips and do a quick check on my portfolio</p>
-            </section>
-        </main>
+  <main>
+    <section class="hero">
+      <h1 class="hero-title">DIOGO<br>BLOG.</h1>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">Desenvolvimento · Design · Aprendizado</p>
+    </section>
 
-        <footer>
-            thank you for visiting, Diogo's blogs <time datetime="2025-12-18">19th December, 2025 </time>
-        </footer>
+    <section>
+      <p data-i18n="home_subtitle">Aqui você encontra dicas de tecnologia e pode conferir meu portfólio.</p>
+    </section>
+  </main>
 
-    </body>
+  <div data-component="footer"></div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/components.js"></script>
+</body>
 </html>

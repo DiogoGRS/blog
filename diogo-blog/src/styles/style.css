@@ -1,88 +1,241 @@
-/* ===== RESET E VARIÁVEIS ===== */
+/* =============================================================
+   STYLE.CSS — Layout e estilos do blog
+
+   Este arquivo NÃO define valores fixos.
+   Todos os valores vêm de tokens.css via var(--...).
+   ============================================================= */
+
+/* ----- Reset ----- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-:root {
-    --bg-primary: #FFFFFF;
-    --bg-secondary: #F8FAFC;
-    --text-primary: #1E293B;
-    --text-secondary: #64748B;
-    --link-color: #1e1e1e; 
-    --accent-color: #10B981;
-    --font-body: 'Lora', Georgia, serif;
-    --font-sans: Arial, 'Helvetica Neue', sans-serif;
-    --header-border: #E2E8F0; 
-}
-
-/* ===== ESTILOS GLOBAIS ===== */
-
+/* ----- Base ----- */
 body {
-    font-family: var(--font-body);
-    line-height: 1.6;
-    color: var(--text-primary);
-    background-color: var(--bg-primary);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* ----- Header — barra horizontal única ----- */
 header {
-    background-color: var(--bg-primary);
-    padding: 30px 20px;
-    text-align: center;
-    border-bottom: 2px solid var(--header-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--header-padding);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
 }
 
-header h1 {
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    letter-spacing: -1px;
+/* Logo: pequeno, uppercase, espaçado — estilo editorial */
+.header-logo a {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-logo);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-header h1 a {
-    color: var(--text-primary);
-    text-decoration: none;
-}
-
+/* ----- Nav ----- */
 nav {
-    border-top: 1px solid var(--header-border);
-    padding-top: 20px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    height: 60px;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
 }
 
 nav a {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--link-color);
-    text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 nav a:hover {
-    text-decoration: underline;
+  color: var(--color-link-hover);
 }
 
+/* ----- Controles do header (tema + idioma) ----- */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.btn-theme,
+.btn-lang {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  letter-spacing: var(--letter-spacing-nav);
+  text-transform: uppercase;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-theme:hover,
+.btn-lang:hover,
+.btn-lang.active {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ----- Hero — título display na home ----- */
+.hero {
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-black);
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -3px;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  letter-spacing: var(--letter-spacing-nav);
+  text-transform: uppercase;
+}
+
+/* ----- Main ----- */
 main {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 20px;
+  max-width: var(--content-max-width);
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-xl);
 }
 
+main h2 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-lg);
+}
+
+main h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semi);
+  margin-bottom: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+main p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+  font-family: var(--font-serif);
+}
+
+main a {
+  color: var(--color-accent);
+}
+
+/* ----- Footer ----- */
 footer {
-    background-color: var(--bg-secondary);
-    color: var(--text-secondary);
-    text-align: center;
-    padding: 20px;
-    margin-top: 60px;
-    border-top: 1px solid #E2E8F0;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: var(--space-lg);
+  margin-top: var(--space-2xl);
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+}
+
+/* ----- Seções ----- */
+section {
+  margin-bottom: var(--space-xl);
+}
+
+/* ----- Lista de posts ----- */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-md) 0;
+}
+
+details summary {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semi);
+  cursor: pointer;
+  color: var(--color-text-primary);
+}
+
+details p {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-sm);
+}
+
+/* ----- Tags / pills ----- */
+.tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semi);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+}
+
+/* ----- Portfolio articles ----- */
+article {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  transition: border-color 0.15s ease;
+}
+
+article:hover {
+  border-color: var(--color-accent);
+}
+
+article h3 {
+  margin-top: 0;
+}
+
+/* ----- Imagens ----- */
+figure {
+  margin: var(--space-xl) 0;
+}
+
+figure img {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+figcaption {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
 }

@@ -1,0 +1,78 @@
+/* =============================================================
+   DESIGN TOKENS — Fonte da verdade do design do blog
+
+   Como usar: sempre via var(--nome-do-token) no style.css.
+   NUNCA escreva valores fixos (hex, px, etc.) fora deste arquivo.
+   ============================================================= */
+
+:root {
+  /* ----- Cores: Light Mode (padrão) ----- */
+  --color-bg-primary:    #FFFFFF;
+  --color-bg-secondary:  #F5F5F5;
+  --color-text-primary:  #111111;
+  --color-text-secondary:#666666;
+  --color-accent:        #E8533A;
+  --color-border:        #E5E5E5;
+  --color-link:          #111111;
+  --color-link-hover:    #E8533A;
+
+  /* ----- Tipografia ----- */
+  --font-serif:   'Lora', Georgia, serif;
+  --font-sans:    'Space Grotesk', Arial, 'Helvetica Neue', sans-serif;
+  --font-display: 'Space Grotesk', 'Arial Black', sans-serif;
+
+  --font-size-xs:      12px;
+  --font-size-sm:      14px;
+  --font-size-base:    16px;
+  --font-size-lg:      20px;
+  --font-size-xl:      28px;
+  --font-size-2xl:     48px;
+  --font-size-display: clamp(64px, 12vw, 140px);
+
+  --font-weight-normal: 400;
+  --font-weight-semi:   600;
+  --font-weight-bold:   700;
+  --font-weight-black:  900;
+
+  --line-height-base:    1.6;
+  --letter-spacing-nav:  1.5px;
+  --letter-spacing-logo: 2.5px;
+
+  /* ----- Espaçamento ----- */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-2xl: 60px;
+  --space-3xl: 100px;
+
+  /* ----- Bordas ----- */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-pill: 999px;
+
+  /* ----- Layout ----- */
+  --content-max-width: 860px;
+  --header-padding:    var(--space-lg) var(--space-xl);
+}
+
+/* =============================================================
+   DARK MODE
+
+   Só sobrescrevemos as cores — tipografia, espaçamento e layout
+   permanecem os mesmos. O atributo data-theme="dark" é aplicado
+   na tag <html> pelo theme.js.
+
+   Paleta: preto quente (sem azul), próximo ao Claude dark mode.
+   ============================================================= */
+
+[data-theme="dark"] {
+  --color-bg-primary:    #111111;
+  --color-bg-secondary:  #1C1C1C;
+  --color-text-primary:  #F0EFED;
+  --color-text-secondary:#999999;
+  --color-border:        #2A2A2A;
+  --color-link:          #F0EFED;
+  --color-link-hover:    #E8533A;
+}
