@@ -17,9 +17,9 @@
   --color-link-hover:    #E8533A;
 
   /* ----- Tipografia ----- */
-  --font-serif:   'Lora', Georgia, serif;
   --font-sans:    'Space Grotesk', Arial, 'Helvetica Neue', sans-serif;
   --font-display: 'Space Grotesk', 'Arial Black', sans-serif;
+  --font-mono:    'Fira Code', 'Cascadia Code', 'Consolas', monospace;
 
   --font-size-xs:      12px;
   --font-size-sm:      14px;
@@ -30,6 +30,7 @@
   --font-size-display: clamp(64px, 12vw, 140px);
 
   --font-weight-normal: 400;
+  --font-weight-medium: 450;
   --font-weight-semi:   600;
   --font-weight-bold:   700;
   --font-weight-black:  900;
@@ -55,6 +56,7 @@
   /* ----- Layout ----- */
   --content-max-width: 860px;
   --header-padding:    var(--space-lg) var(--space-xl);
+  --about-photo-size:  180px;
 }
 
 /* =============================================================

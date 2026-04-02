@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../styles/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..900&display=swap" rel="stylesheet">
   <script src="../js/theme.js"></script>
 </head>
 <body>
@@ -16,26 +16,65 @@
 
   <main>
     <h2 data-i18n="posts_title">Artigos</h2>
-    <ul>
-      <li>
-        <details>
-          <summary>JavaScript Regular Expressions</summary>
-          <p>A summary on regular expressions and where it can be used in your JS code.</p>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>JavaScript Search Methods</summary>
-          <p>Native methods to query data in strings, JSONs etc.</p>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>JavaScript Strings Prototype Methods</summary>
-          <p>JavaScript has quite a few useful methods that can be used in every string throughout the code.</p>
-        </details>
-      </li>
-    </ul>
+    <p class="posts-subtitle" data-i18n="posts_subtitle">Artigos sobre desenvolvimento, JavaScript e o ecossistema web.</p>
+
+    <div class="posts-grid">
+      <article class="post-card">
+        <div class="post-card-meta">
+          <span class="tag">JavaScript</span>
+          <time datetime="2026-04-01">01 Abr 2026</time>
+        </div>
+        <h3 class="post-card-title">
+          <span class="lang-block lang-active" data-lang="pt">Ordenação de Arrays em JavaScript</span>
+          <span class="lang-block" data-lang="en">Array Sorting in JavaScript</span>
+        </h3>
+        <p class="post-card-excerpt" data-i18n="post_sort_excerpt">Como sort() e toSorted() funcionam por baixo dos panos — e por que 10 vem antes do 2.</p>
+        <a href="js-sort-function.html" class="post-card-link" data-i18n="posts_read_more">Ler mais &rarr;</a>
+      </article>
+
+      <article class="post-card">
+        <div class="post-card-meta">
+          <span class="tag">JavaScript</span>
+          <time datetime="2026-04-01">01 Abr 2026</time>
+        </div>
+        <h3 class="post-card-title">
+          <span class="lang-block lang-active" data-lang="pt">Manipulação de Strings em JavaScript</span>
+          <span class="lang-block" data-lang="en">String Manipulation in JavaScript</span>
+        </h3>
+        <p class="post-card-excerpt" data-i18n="post_strmanip_excerpt">trim(), replace() com regex, normalize() e Intl.Collator: as ferramentas essenciais de manipulação de strings.</p>
+        <a href="js-strings-manipulation.html" class="post-card-link" data-i18n="posts_read_more">Ler mais &rarr;</a>
+      </article>
+
+      <article class="post-card">
+        <div class="post-card-meta">
+          <span class="tag">JavaScript</span>
+          <time datetime="2025-07-12">12 Jul 2025</time>
+        </div>
+        <h3 class="post-card-title">JavaScript Regular Expressions</h3>
+        <p class="post-card-excerpt" data-i18n="post_regex_excerpt">Um resumo sobre expressões regulares e onde usá-las no seu código JS.</p>
+        <a href="#" class="post-card-link" data-i18n="posts_read_more">Ler mais &rarr;</a>
+      </article>
+
+      <article class="post-card">
+        <div class="post-card-meta">
+          <span class="tag">JavaScript</span>
+          <time datetime="2025-07-10">10 Jul 2025</time>
+        </div>
+        <h3 class="post-card-title">JavaScript Search Methods</h3>
+        <p class="post-card-excerpt" data-i18n="post_search_excerpt">Métodos nativos para consultar dados em strings, JSONs etc.</p>
+        <a href="#" class="post-card-link" data-i18n="posts_read_more">Ler mais &rarr;</a>
+      </article>
+
+      <article class="post-card">
+        <div class="post-card-meta">
+          <span class="tag">JavaScript</span>
+          <time datetime="2025-07-10">10 Jul 2025</time>
+        </div>
+        <h3 class="post-card-title">JavaScript Strings Prototype Methods</h3>
+        <p class="post-card-excerpt" data-i18n="post_strings_excerpt">O JavaScript tem vários métodos úteis disponíveis em qualquer string do código.</p>
+        <a href="#" class="post-card-link" data-i18n="posts_read_more">Ler mais &rarr;</a>
+      </article>
+    </div>
   </main>
 
   <div data-component="footer"></div>

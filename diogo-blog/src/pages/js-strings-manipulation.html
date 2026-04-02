@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manipulação de Strings em JavaScript — Blog do Diogo</title>
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..900&display=swap" rel="stylesheet">
+  <script src="../js/theme.js"></script>
+  <!-- highlight.js: tema definido antes do render para evitar flash -->
+  <link id="hljs-theme" rel="stylesheet" href="">
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = saved ? saved === 'dark' : prefersDark;
+      var base = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/';
+      document.getElementById('hljs-theme').href = base + (isDark ? 'github-dark' : 'github') + '.min.css';
+    })();
+  </script>
+</head>
+<body>
+  <div data-component="header"></div>
+
+  <main>
+    <!-- Cabeçalho do artigo -->
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="tag">JavaScript</span>
+        <time datetime="2026-04-01">01 Abr 2026</time>
+        <span class="article-read-time">6 <span data-i18n="read_time_min">min de leitura</span></span>
+      </div>
+
+      <h1 class="article-title">
+        <span class="lang-block lang-active" data-lang="pt">Manipulação de Strings em JavaScript</span>
+        <span class="lang-block" data-lang="en">String Manipulation in JavaScript</span>
+      </h1>
+
+      <p class="article-lead">
+        <span class="lang-block lang-active" data-lang="pt"><code>trim()</code>, <code>replace()</code> com regex, <code>normalize()</code> e <code>Intl.Collator</code>: as ferramentas essenciais para trabalhar com strings.</span>
+        <span class="lang-block" data-lang="en"><code>trim()</code>, <code>replace()</code> with regex, <code>normalize()</code> and <code>Intl.Collator</code>: the essential toolkit for working with strings.</span>
+      </p>
+    </header>
+
+    <!-- Corpo do artigo -->
+    <div class="article-body">
+
+      <!-- ======== PORTUGUÊS ======== -->
+      <div class="lang-block lang-active" data-lang="pt">
+
+        <h2>trim()</h2>
+        <p>
+          O método <code>trim()</code> remove espaços em branco e quebras de linha (<code>\n</code>) do início
+          e do fim de uma string, retornando uma nova string — sem modificar a original.
+        </p>
+
+        <pre><code>"  hello world  ".trim()
+// → "hello world"
+
+"  linha 1\n".trim()
+// → "linha 1"</code></pre>
+
+        <div class="article-callout">
+          <p>Para remover apenas de um lado: <code>trimStart()</code> limpa o início, <code>trimEnd()</code> limpa o fim.</p>
+        </div>
+
+        <hr class="article-divider">
+
+        <h2>replace() e Expressões Regulares</h2>
+        <p>
+          O método <code>replace()</code> é a ferramenta mais versátil para manipulação de strings.
+          Quando combinado com expressões regulares (regex), permite encontrar e substituir padrões complexos.
+        </p>
+        <p>A sintaxe de um regex é: <code>/padrão/flags</code></p>
+
+        <h3>Padrões</h3>
+
+        <pre><code>// | (OR) — match com "joão" ou "maria"
+/joão|maria/
+
+// [A-Z] (intervalo) — qualquer caractere entre A e Z
+/[A-Z]/
+
+// \D (atalho) — qualquer coisa exceto dígito
+// combinado com replace("") remove tudo que não é número
+/\D/g
+
+// () (grupos de captura) — torna partes do padrão acessíveis
+// como parâmetros na função de substituição
+/([a-z]+)|([0-9]+)/gi</code></pre>
+
+        <h3>Flags</h3>
+
+        <pre><code>// g — todas as ocorrências (sem ela, só o primeiro match é substituído)
+// i — case-insensitive
+// m — multi-line (^ e $ consideram quebras de linha)</code></pre>
+
+        <h3>Funções de Substituição</h3>
+        <p>
+          O segundo argumento do <code>replace()</code> pode ser uma função em vez de uma string.
+          Essa função recebe até 5 parâmetros:
+        </p>
+
+        <pre><code>string.replace(regex, (match, p1, p2, offset, originalString) => {
+  // match          → a substring completa que deu match
+  // p1, p2...      → conteúdo dos grupos de captura (parênteses no regex)
+  // offset         → posição onde o match começa na string original
+  // originalString → a string completa sendo processada
+  return "novo valor"
+})</code></pre>
+
+        <p>Exemplo prático — converte letras para maiúsculo e números para soma dos dígitos:</p>
+
+        <pre><code>const result = str.replace(/([a-z]+)|([0-9]+)/gi, (match, p1, p2) => {
+  if (p1) return p1.toUpperCase()
+  if (p2) {
+    const digits = Array.from(p2)
+    return digits.reduce((acc, d) => acc + Number(d), 0).toString()
+  }
+})</code></pre>
+
+        <hr class="article-divider">
+
+        <h2>normalize("NFD") — Removendo Acentos</h2>
+        <p>
+          O método <code>normalize("NFD")</code> decompõe caracteres acentuados em sua forma base + acento separado.
+          Isso permite remover os acentos com <code>replace()</code>:
+        </p>
+
+        <pre><code>const semAcento = str
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+
+// "Ação"      → "Acao"
+// "São Paulo" → "Sao Paulo"</code></pre>
+
+        <div class="article-callout">
+          <p>
+            O browser normaliza automaticamente ao exibir strings decompostas — visualmente você ainda veria a frase original.
+            Para enxergar os caracteres separados de fato, use <code>Array.from(str.normalize("NFD"))</code>.
+          </p>
+        </div>
+
+        <hr class="article-divider">
+
+        <h2>Intl.Collator — Comparação sem Modificar a String</h2>
+        <p>
+          Para comparar strings de forma locale-aware sem alterar os valores originais, use <code>Intl.Collator</code>.
+          É a alternativa mais limpa ao <code>localeCompare</code> quando você precisa comparar muitas strings
+          (o Collator é instanciado uma vez e reutilizado, o que é mais eficiente).
+        </p>
+
+        <pre><code>const collator = new Intl.Collator('pt', { sensitivity: 'base' })
+
+collator.compare("cafe", "café")   // → 0 (iguais para fins de comparação)
+collator.compare("a", "b")         // → número negativo
+collator.compare("b", "a")         // → número positivo</code></pre>
+
+        <p>
+          Com <code>sensitivity: 'base'</code>, acentos e diferenças entre maiúsculas e minúsculas são ignorados
+          na comparação — útil para buscas e ordenações que precisam ser tolerantes a variações.
+        </p>
+
+      </div>
+
+      <!-- ======== ENGLISH ======== -->
+      <div class="lang-block" data-lang="en">
+
+        <h2>trim()</h2>
+        <p>
+          The <code>trim()</code> method removes whitespace and line breaks (<code>\n</code>) from the beginning
+          and end of a string, returning a new string — without modifying the original.
+        </p>
+
+        <pre><code>"  hello world  ".trim()
+// → "hello world"
+
+"  line 1\n".trim()
+// → "line 1"</code></pre>
+
+        <div class="article-callout">
+          <p>To remove from one side only: <code>trimStart()</code> cleans the beginning, <code>trimEnd()</code> cleans the end.</p>
+        </div>
+
+        <hr class="article-divider">
+
+        <h2>replace() and Regular Expressions</h2>
+        <p>
+          The <code>replace()</code> method is the most versatile string manipulation tool.
+          When combined with regular expressions (regex), it allows finding and replacing complex patterns.
+        </p>
+        <p>Regex syntax: <code>/pattern/flags</code></p>
+
+        <h3>Patterns</h3>
+
+        <pre><code>// | (OR) — matches "john" or "mary"
+/john|mary/
+
+// [A-Z] (range) — any character between A and Z
+/[A-Z]/
+
+// \D (shorthand) — anything except a digit
+// combined with replace("") removes everything that isn't a number
+/\D/g
+
+// () (capture groups) — makes parts of the pattern accessible
+// as parameters in the replacement function
+/([a-z]+)|([0-9]+)/gi</code></pre>
+
+        <h3>Flags</h3>
+
+        <pre><code>// g — all occurrences (without it, only the first match is replaced)
+// i — case-insensitive
+// m — multi-line (^ and $ consider line breaks)</code></pre>
+
+        <h3>Replacement Functions</h3>
+        <p>
+          The second argument of <code>replace()</code> can be a function instead of a string.
+          This function receives up to 5 parameters:
+        </p>
+
+        <pre><code>string.replace(regex, (match, p1, p2, offset, originalString) => {
+  // match          → the full substring that matched
+  // p1, p2...      → content of capture groups (parentheses in the regex)
+  // offset         → position where the match begins in the original string
+  // originalString → the full string being processed
+  return "new value"
+})</code></pre>
+
+        <p>Practical example — converts letters to uppercase and numbers to digit sum:</p>
+
+        <pre><code>const result = str.replace(/([a-z]+)|([0-9]+)/gi, (match, p1, p2) => {
+  if (p1) return p1.toUpperCase()
+  if (p2) {
+    const digits = Array.from(p2)
+    return digits.reduce((acc, d) => acc + Number(d), 0).toString()
+  }
+})</code></pre>
+
+        <hr class="article-divider">
+
+        <h2>normalize("NFD") — Removing Accents</h2>
+        <p>
+          The <code>normalize("NFD")</code> method decomposes accented characters into their base form + separate accent mark.
+          This allows removing accents with <code>replace()</code>:
+        </p>
+
+        <pre><code>const withoutAccents = str
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+
+// "Ação"      → "Acao"
+// "São Paulo" → "Sao Paulo"</code></pre>
+
+        <div class="article-callout">
+          <p>
+            The browser automatically normalizes decomposed strings on display — you'd still see the original phrase visually.
+            To actually see the separated characters, use <code>Array.from(str.normalize("NFD"))</code>.
+          </p>
+        </div>
+
+        <hr class="article-divider">
+
+        <h2>Intl.Collator — Comparison Without Modifying the String</h2>
+        <p>
+          To compare strings in a locale-aware way without altering the original values, use <code>Intl.Collator</code>.
+          It's the cleanest alternative to <code>localeCompare</code> when comparing many strings
+          (the Collator is instantiated once and reused, which is more efficient).
+        </p>
+
+        <pre><code>const collator = new Intl.Collator('en', { sensitivity: 'base' })
+
+collator.compare("cafe", "café")   // → 0 (equal for comparison purposes)
+collator.compare("a", "b")         // → negative number
+collator.compare("b", "a")         // → positive number</code></pre>
+
+        <p>
+          With <code>sensitivity: 'base'</code>, accents and case differences are ignored in the comparison —
+          useful for searches and sorts that need to be tolerant of variations.
+        </p>
+
+      </div>
+    </div>
+  </main>
+
+  <div data-component="footer"></div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="../js/hljs-sync.js"></script>
+</body>
+</html>

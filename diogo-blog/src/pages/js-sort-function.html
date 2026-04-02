@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ordenação de Arrays em JavaScript — Blog do Diogo</title>
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..900&display=swap" rel="stylesheet">
+  <script src="../js/theme.js"></script>
+  <!-- highlight.js: tema definido antes do render para evitar flash -->
+  <link id="hljs-theme" rel="stylesheet" href="">
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = saved ? saved === 'dark' : prefersDark;
+      var base = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/';
+      document.getElementById('hljs-theme').href = base + (isDark ? 'github-dark' : 'github') + '.min.css';
+    })();
+  </script>
+</head>
+<body>
+  <div data-component="header"></div>
+
+  <main>
+    <!-- Cabeçalho do artigo -->
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="tag">JavaScript</span>
+        <time datetime="2026-04-01">01 Abr 2026</time>
+        <span class="article-read-time">4 <span data-i18n="read_time_min">min de leitura</span></span>
+      </div>
+
+      <h1 class="article-title">
+        <span class="lang-block lang-active" data-lang="pt">Ordenação de Arrays em JavaScript</span>
+        <span class="lang-block" data-lang="en">Array Sorting in JavaScript</span>
+      </h1>
+
+      <p class="article-lead">
+        <span class="lang-block lang-active" data-lang="pt">Como <code>sort()</code> e <code>toSorted()</code> funcionam por baixo dos panos — e por que 10 vem antes do 2.</span>
+        <span class="lang-block" data-lang="en">How <code>sort()</code> and <code>toSorted()</code> work under the hood — and why 10 comes before 2.</span>
+      </p>
+    </header>
+
+    <!-- Corpo do artigo -->
+    <div class="article-body">
+
+      <!-- ======== PORTUGUÊS ======== -->
+      <div class="lang-block lang-active" data-lang="pt">
+
+        <h2>sort() e toSorted()</h2>
+        <p>
+          O JavaScript tem duas funções nativas para ordenar arrays: <code>sort()</code> e <code>toSorted()</code>.
+          O comportamento de ambas é idêntico, com uma diferença importante: <code>toSorted()</code> cria uma cópia
+          do array original antes de ordenar, preservando o original intacto. <code>sort()</code> modifica o array diretamente (in-place).
+        </p>
+
+        <div class="article-callout">
+          <p>Se você precisar preservar o array original, prefira <code>toSorted()</code> ou crie uma cópia manualmente: <code>[...arr].sort()</code>.</p>
+        </div>
+
+        <h2>Ordenação Lexicográfica</h2>
+        <p>
+          Quando chamada sem argumentos, <code>sort()</code> ordena os elementos de forma <strong>lexicográfica</strong> —
+          trata tudo como string e compara caractere por caractere, usando a tabela UTF-16.
+          Isso significa que um array de números não será ordenado numericamente:
+        </p>
+
+        <pre><code>[10, 2, 1, 21, 3].sort()
+// → [1, 10, 2, 21, 3]</code></pre>
+
+        <h3>Por que 10 aparece antes do 2?</h3>
+        <p>
+          Porque <code>"10"</code> começa com <code>"1"</code>, e <code>"2"</code> começa com <code>"2"</code>.
+          O sort avalia o primeiro caractere como critério principal; os seguintes servem apenas como desempate.
+          O elemento <code>arr[0]</code> define a ordem — <code>arr[1]</code>, <code>arr[2]</code>... só entram
+          em cena quando há empate.
+        </p>
+
+        <h2>UTF-16 e o Problema com o Português</h2>
+        <p>
+          A comparação UTF-16 converte cada caractere em sua <em>Code Unit</em> e compara esses números.
+          Maiúsculas e minúsculas têm Code Units diferentes, e acentos possuem valores muito maiores que as letras básicas:
+          <code>'Z' → 90</code> · <code>'a' → 97</code> · <code>'á' → 225</code> · <code>'ç' → 231</code>
+        </p>
+
+        <p>
+          Isso quebra a ordenação alfabética em português — acentos acabam sempre indo para o final,
+          pois seus Code Units são maiores que qualquer letra sem acento:
+        </p>
+
+        <pre><code>["Zebra", "Árvore", "Caça"].sort()
+// → ["Caça", "Zebra", "Árvore"]
+// Esperado: ["Árvore", "Caça", "Zebra"]</code></pre>
+
+        <p>A solução é usar <code>localeCompare</code>, que respeita as regras do idioma:</p>
+
+        <pre><code>const animais = ["Zebra", "Árvore", "Caça"]
+
+animais.sort((a, b) => a.localeCompare(b))
+// → ["Árvore", "Caça", "Zebra"]</code></pre>
+
+        <h2>Funções de Comparação</h2>
+        <p>
+          Para garantir a ordenação correta de números, passe uma função de comparação.
+          O <code>sort()</code> interpreta o retorno dela da seguinte forma:
+          resultado negativo coloca <code>a</code> antes de <code>b</code>, positivo coloca <code>b</code> antes de <code>a</code>, e zero mantém a ordem atual.
+        </p>
+
+        <pre><code>const numeros = [10, 2, 1, 21, 3]
+
+// Crescente
+numeros.sort((a, b) => a - b)
+// → [1, 2, 3, 10, 21]
+
+// Decrescente
+numeros.sort((a, b) => b - a)
+// → [21, 10, 3, 2, 1]</code></pre>
+
+        <p>
+          Qualquer função que retorne um número segue essa convenção — a subtração é só o caso mais comum.
+          Internamente, o <code>sort()</code> usa o algoritmo <strong>Timsort</strong>, um híbrido entre Merge Sort
+          e Insertion Sort, eficiente para dados parcialmente ordenados.
+        </p>
+
+        <div class="article-callout">
+          <p>A função passada ao <code>sort()</code> deve sempre retornar um número. Qualquer outra lógica funciona, desde que respeite: negativo, zero ou positivo.</p>
+        </div>
+
+      </div>
+
+      <!-- ======== ENGLISH ======== -->
+      <div class="lang-block" data-lang="en">
+
+        <h2>sort() and toSorted()</h2>
+        <p>
+          JavaScript provides two native functions for sorting arrays: <code>sort()</code> and <code>toSorted()</code>.
+          Both behave identically, with one key difference: <code>toSorted()</code> creates a copy of the original array
+          before sorting, leaving the original unchanged. <code>sort()</code> modifies the array directly (in-place).
+        </p>
+
+        <div class="article-callout">
+          <p>To preserve the original array, prefer <code>toSorted()</code> or create a copy manually: <code>[...arr].sort()</code>.</p>
+        </div>
+
+        <h2>Lexicographic Ordering</h2>
+        <p>
+          Without arguments, <code>sort()</code> orders elements <strong>lexicographically</strong> —
+          it treats everything as a string and compares character by character using the UTF-16 table.
+          This means a number array won't be sorted numerically:
+        </p>
+
+        <pre><code>[10, 2, 1, 21, 3].sort()
+// → [1, 10, 2, 21, 3]</code></pre>
+
+        <h3>Why does 10 come before 2?</h3>
+        <p>
+          Because <code>"10"</code> starts with <code>"1"</code>, and <code>"2"</code> starts with <code>"2"</code>.
+          sort() evaluates the first character as the main criterion; subsequent characters are only used as tiebreakers.
+          <code>arr[0]</code> defines the order — <code>arr[1]</code>, <code>arr[2]</code>... only come into play on a tie.
+        </p>
+
+        <h2>UTF-16 and the Comparison Mechanism</h2>
+        <p>
+          UTF-16 comparison converts each character to its <em>Code Unit</em> and compares those numbers.
+          Uppercase and lowercase letters have different Code Units, and accented characters have much larger
+          values than basic letters:
+          <code>'Z' → 90</code> · <code>'a' → 97</code> · <code>'á' → 225</code> · <code>'ç' → 231</code>
+        </p>
+
+        <p>This can cause unexpected results when sorting strings with accented characters:</p>
+
+        <pre><code>["Zebra", "Árvore", "Caça"].sort()
+// → ["Caça", "Zebra", "Árvore"]
+// Expected: ["Árvore", "Caça", "Zebra"]</code></pre>
+
+        <p>The solution is <code>localeCompare</code>, which respects language-specific rules:</p>
+
+        <pre><code>const animals = ["Zebra", "Árvore", "Caça"]
+
+animals.sort((a, b) => a.localeCompare(b))
+// → ["Árvore", "Caça", "Zebra"]</code></pre>
+
+        <h2>Comparison Functions</h2>
+        <p>
+          To ensure correct numeric sorting, pass a comparison function.
+          <code>sort()</code> interprets its return value as follows:
+          a negative result places <code>a</code> before <code>b</code>, positive places <code>b</code> before <code>a</code>, and zero keeps the current order.
+        </p>
+
+        <pre><code>const numbers = [10, 2, 1, 21, 3]
+
+// Ascending
+numbers.sort((a, b) => a - b)
+// → [1, 2, 3, 10, 21]
+
+// Descending
+numbers.sort((a, b) => b - a)
+// → [21, 10, 3, 2, 1]</code></pre>
+
+        <p>
+          Any function returning a number follows this convention — subtraction is just the most common case.
+          Internally, <code>sort()</code> uses the <strong>Timsort</strong> algorithm, a hybrid of Merge Sort
+          and Insertion Sort, efficient for partially ordered data.
+        </p>
+
+        <div class="article-callout">
+          <p>The function passed to <code>sort()</code> must always return a number. Any logic works, as long as it returns: negative, zero, or positive.</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <div data-component="footer"></div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="../js/hljs-sync.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l *.md)",
+      "Bash(wc -l diogo-blog/src/pages/*.html)",
+      "Bash(curl -L -o \"C:/Users/diogo/OneDrive/Área de Trabalho/meus projetos/blog/diogo-blog/src/assets/images/diogo-profile.jpg\" \"https://media.licdn.com/dms/image/v2/D4D03AQGmAsu4vI3VzA/profile-displayphoto-scale_400_400/B4DZjafZJmHYAg-/0/1756012320666?e=1776902400&v=beta&t=io4Yuu0ga92Y2485kTH2IPjBRZaIU-cx-cTueONkvoI\")",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

@@ -8,34 +8,72 @@
   <link rel="stylesheet" href="../styles/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..900&display=swap" rel="stylesheet">
   <script src="../js/theme.js"></script>
 </head>
 <body>
   <div data-component="header"></div>
 
   <main>
-    <h2 data-i18n="about_title">Sobre Mim</h2>
-
-    <section>
-      <h3 data-i18n="about_who_title">Quem sou</h3>
-      <p data-i18n="about_who_text">Me chamo Diogo, tenho 26 anos e moro no Brasil.</p>
-      <figure>
-        <img src="https://pbs.twimg.com/profile_images/1746203923499675648/48itzTeH_400x400.jpg" alt="Foto do Diogo" width="600" height="400">
-        <figcaption>Diogo curtindo um feriado depois de uma semana comendo só milho</figcaption>
+    <section class="about-intro">
+      <div class="about-intro-text">
+        <h2 data-i18n="about_title">Sobre Mim</h2>
+        <p data-i18n="about_who_text">Sou Diogo Goncalves Rosa, desenvolvedor Full Stack com mais de 3 anos de experiencia construindo aplicacoes web robustas, do banco de dados ao frontend. Moro em Sao Paulo e sou formado em Ciencia da Computacao pela UENP.</p>
+      </div>
+      <figure class="about-photo">
+        <img src="../assets/images/diogo-profile.jpg" alt="Foto do Diogo" width="280" height="280">
       </figure>
     </section>
 
     <section>
-      <h3 data-i18n="about_what_title">O que faço</h3>
-      <p data-i18n="about_what_text1">Trabalho como desenvolvedor de software em uma empresa de contabilidade, usando Vue.js e NestJS.</p>
-      <p data-i18n="about_what_text2">Tenho experiência com cloud, SSR, gestão de blogs e campanhas de marketing multicanal.</p>
+      <h3 data-i18n="about_what_title">O que faco</h3>
+      <p data-i18n="about_what_text1">Trabalho como desenvolvedor de software pleno na EXT Contabilidade, onde desenvolvo aplicacoes web completas usando NestJS, Vue.js, Nuxt.js e TypeScript com MongoDB. Projeto e mantenho APIs RESTful, implemento autenticacao com Firebase e construo pipelines automatizados para otimizar fluxos contabeis.</p>
+      <p data-i18n="about_what_text2">Antes disso, atuei como freelancer entregando projetos web customizados, landing pages dinamicas e templates de e-mail, integrando APIs de terceiros e automatizando fluxos de comunicacao.</p>
     </section>
 
     <section>
-      <h3 data-i18n="about_learning_title">Minha jornada</h3>
-      <p data-i18n="about_learning_text1">Estou aprimorando minhas bases de desenvolvimento frontend e backend.</p>
-      <p data-i18n="about_learning_text2">Construí este blog começando apenas com HTML, adicionando CSS, JavaScript, e eventualmente bibliotecas e frameworks.</p>
+      <h3 data-i18n="about_stack_title">Stack e ferramentas</h3>
+      <div class="about-skills">
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="about_skill_lang">Linguagens</span>
+          <p>TypeScript, JavaScript, HTML, CSS</p>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">Frameworks</span>
+          <p>Vue.js, Nuxt.js, NestJS, Node.js</p>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="about_skill_db">Bancos de dados</span>
+          <p>MongoDB, Firebase</p>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">Cloud & DevOps</span>
+          <p>Google Cloud Platform, CI/CD, Browserless</p>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="about_skill_test">Testes</span>
+          <p>Vitest, Jest, Playwright</p>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label" data-i18n="about_skill_tools">Ferramentas</span>
+          <p>Strapi, Git, RESTful APIs, WebSockets</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 data-i18n="about_highlights_title">Destaques</h3>
+      <ul class="about-highlights">
+        <li data-i18n="about_highlight_1">Automatizei a emissao de notas fiscais e calculos tributarios de ponta a ponta, eliminando 100% do trabalho manual nessas tarefas.</li>
+        <li data-i18n="about_highlight_2">Implementei arquitetura SSR com Nuxt para melhorar performance de SEO e indexacao em motores de busca.</li>
+        <li data-i18n="about_highlight_3">Refatorei fluxos de onboarding, redesenhando landing pages e simplificando processos de criacao e migracao de empresas.</li>
+        <li data-i18n="about_highlight_4">Implementei suites abrangentes de testes unitarios e de integracao garantindo confiabilidade em toda a stack.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 data-i18n="about_education_title">Formacao</h3>
+      <p data-i18n="about_education_text">Bacharel em Ciencia da Computacao — UENP (Universidade Estadual do Norte do Parana), 2018 - 2023.</p>
     </section>
   </main>
 
