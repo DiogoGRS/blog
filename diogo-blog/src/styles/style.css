@@ -312,6 +312,9 @@ figcaption {
 /* ----- Posts — subtitulo ----- */
 .posts-subtitle {
   margin-bottom: var(--space-xl);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semi);
+  color: var(--color-text-primary);
 }
 
 /* ----- Posts — grid de cards ----- */
@@ -322,7 +325,7 @@ figcaption {
 }
 
 .post-card {
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
   transition: border-color 0.15s ease;
@@ -339,7 +342,8 @@ figcaption {
   margin-bottom: var(--space-md);
 }
 
-.post-card-meta time {
+.post-card-meta time,
+.post-card-read-time {
   font-family: var(--font-sans);
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
@@ -367,7 +371,7 @@ figcaption {
   color: var(--color-text-primary);
   text-decoration: none;
   display: inline-block;
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-xs) var(--space-md);
   transition: color 0.15s ease, border-color 0.15s ease;
@@ -404,7 +408,8 @@ span.lang-block.lang-active { display: inline; }
 .article-meta time,
 .article-read-time {
   font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
 }
 
@@ -427,9 +432,9 @@ span.lang-block.lang-active { display: inline; }
 
 /* ----- Corpo do artigo ----- */
 .article-body h2 {
-  font-family: var(--font-display);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semi);
   color: var(--color-text-primary);
   margin-top: var(--space-2xl);
   margin-bottom: var(--space-md);
@@ -437,7 +442,7 @@ span.lang-block.lang-active { display: inline; }
 
 .article-body h3 {
   font-family: var(--font-sans);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-semi);
   color: var(--color-text-primary);
   margin-top: var(--space-xl);
